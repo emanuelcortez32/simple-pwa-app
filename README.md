@@ -13,6 +13,25 @@
     menú de aplicaciones). No dependen de sistemas operativos (se ejecutan en el
     navegador) y van incorporando funcionalidades nativas del dispositivo.
 
+**Componentes de una PWA**
+
+<div align="center">
+  <img src="https://cmsphoto.ww-cdn.com/superstatic/81328/art/grande/20908900-24178111.jpg?v=1521233741">
+</div>
+
+* La App Shell:
+
+    Se trata del esqueleto de tu aplicación, al interior del cual se difundirán tus datos. La App Shell contiene elementos principales de interfaz y los componentes estrictamente necesarios para el funcionamiento de la interfaz de usuario. Estos elementos están conservados ahí localmente, mientras los contenidos están recuperados dinámicamente con una API. La App Shell permite, a partir de la segunda vista en la aplicación, una visualización rápida de la aplicación, un consumo del ancho de banda al más bajo nivel posible, un cargamento de los recursos estadísticos desde el caché local, y por fin la separación del contenido de la navegación, lo que permite así obtener tiempos de cargamiento de la aplicación muy cortos.
+
+* Un Service Worker:
+
+    Se trata de la base técnica de numerosas funcionalidades que distinguen las PWAs de las páginas web clásicas. El Service Worker se posiciona entre la PWA y el navegador (o la red cuando está disponible) y puede fuertemente modificar el comportamiento de la PWA gracias a numerosas posibilidades. Los Service Workers también son un componente esencial para la recepción de las notificaciones push en tu PWA.     
+
+* Un Manifiesto JSON:
+
+    Tu PWA está descrita en un fichero JSON llamado el manifiesto (Web App Manifest). Se trata de un fichero que contiene los metadatos necesarios a la referencia de tu PWA en una Tienda como el Windows Store, ou a la descarga de tu PWA en las pantallas iniciales de tu usuario. Entonces, es un fichero descriptivo que permite dar un resultado más nativo a la aplicación, con una visualización en pantalla completa, iconos identificables, o también la posibilidad de modificar la orientación de la pantalla.   
+
+
 **Características de una PWA**
 
 * Responsive:
