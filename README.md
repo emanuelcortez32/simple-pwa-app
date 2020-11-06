@@ -1,50 +1,73 @@
-## Web Manifest
+## Service Worker
 
-El web manifest permite implementar la funcionalidad de Add to Homescreen.
+Es lo que hace posible que las PWA funcionen, es un script que nuestro navegador corre detrás de escena y este no puede tocar el DOM.
 
-Create-react-app nos da un Web Manifest pre armado el cual debemos configurar. Todo lo que tiene que ver con nuestro Web Manifest está dentro de los archivos index.html y manifest.json de la carpeta public de nuestro proyecto.
+Podemos tener control absoluto a nivel red de nuestra aplicación gracias a los service workers.
 
-En el **manifest.json** se pueden ver varios atributos:
-* **short_name**: Es el nombre que se utiliza en la Homescreen.
-* **name**: Es el nombre de nuestra aplicación.
-* **icons**: Especifica un array de imágenes que servirán como iconos de la aplicación. Cambiaremos el "favicon.ico" por "icon.png", especificamos el tamaño a 512x512 y el tipo a "image/png".
-* **start_url**: Nos indica en que página comienza nuestra aplicación, por compatibilidad siempre conviene que sea "/" en lugar de "./index.html".
-* **display**: Define el modo de visualización para la aplicación. Standalone significa que la aplicación puede correr por su misma.
-* **theme_color**: Define qué color vamos a usar en la barra de tareas de Android para que combine con nuestra aplicación.
-* **related_applications**: Sirve si queremos que Chrome en el Add to Homescreen recomiende una aplicación del Store.
+**Features del Service Workers**:
+* Soporte Offline
+* Proxy In-Browser
+* Push Notifications
 
-```json
-{
-  "short_name": "Recetas",
-  "name": "Platzi Recetas",
-  "icons": [
-    {
-      "src": "/icon.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ],
-  "start_url": "/",
-  "scope": "/",
-  "display": "standalone",
-  "theme_color": "#ffa500",
-  "background_color": "#ffffff",
-  "related_applications": [],
-  "prefer_related_applications": false
-}
-```
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
 
-Finalmente, hay que linkear el manifest en el HTML.
+## Estrategias de Carga
 
-```html
-<link rel="manifest" href="manifest.json">
-```
+Existen diferentes estrategias de carga.
 
-En iOS necesitamos añadir alguna metadata al index.html de nuestro proyecto. Al momento de probar nuestra aplicación en iOS nos daremos cuenta de que el Add to Homescreen en este caso debe ser añadido manualmente por el usuario.
+**Network Only**
 
-```html
-<link rel='apple-touch-icon' href='/icon.png' />
-<meta name='apple-mobile-web-app-title' content='PlatziRecetas' />
-<meta name='apple-mobile-web-app-capable' content='yes' />
-<meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' />
-```
+La primera y fundamental se llama Network Only. Esta se encarga checar si hay conexión a internet, si existe una conexión realiza la petición de información, en caso de no haber conexión se rompe la página.
+
+¿Cuándo usar Network Only?
+Por defecto si no queremos cache o manejamos información en tiempo real.
+
+<div align="center">
+  <img src="img/network-only.jpg">
+  <small><p>Network Only</p></small>
+</div>
+
+**Network First**
+
+Network First es otra estrategia de carga, se encarga mandar la petición a internet, si la conexión a internet esta caída entonces tomara la información que tenga almacenada en cache.
+
+¿Cuándo usar Network First?
+Cuando queremos la última versión de un asset y tener soporte offline.
+
+<div align="center">
+  <img src="img/network-first.jpg">
+  <small><p>Network First</p></small>
+</div>
+
+**Cache First**
+
+Es una estrategia de carga que lo primero que hace es ir al cache y si encuentra el recurso lo sirve directamente. En caso de no encontrarlo va a ir a red, guardar la información en cache y servir esa versión.
+
+Esta estrategia puede ser peligrosa y solo es recomendable cuando queremos máxima velocidad y estamos manejando un recurso que nunca cambia, como una imagen o alguna fuente.
+
+<div align="center">
+  <img src="img/cache-first.jpg">
+  <small><p>Cache First</p></small>
+</div>
+
+**Stale While Revalidate**
+
+Esta es una estrategia de carga muy particular y que mejor funciona a la hora de mejorar el rendimiento. Lo que hace es ir a cache y a red al mismo tiempo, toma la versión más rápida que siempre será la de cache y en cuanto recibe la de red va a actualizar la versión de cache.
+
+Es recomendable esta estrategia cuando queremos mucha velocidad y estamos manejando un recurso que puede estar levemente desactualizado.
+
+<div align="center">
+  <img src="img/stale-while-revalidate.jpg">
+  <small><p>Stale While revalidate</p></small>
+</div>
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
+## Workbox
+NUNCA conviene escribir nuestro propio service worker especialmente con herramientas de bajo nivel.
+
+Para implementar nuestro propio service worker usaremos Workbox, una librería creada por Google para crear Service Workers.
