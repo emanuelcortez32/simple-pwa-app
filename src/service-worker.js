@@ -7,11 +7,12 @@
 // You can also remove this file if you'd prefer not to use a
 // service worker, and the Workbox build step will be skipped.
 
+import { CacheableResponsePlugin } from 'workbox-cacheable-response';
 import { clientsClaim } from 'workbox-core';
 import { ExpirationPlugin } from 'workbox-expiration';
 import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
-import { StaleWhileRevalidate } from 'workbox-strategies';
+import { NetworkFirst, StaleWhileRevalidate } from 'workbox-strategies';
 
 clientsClaim();
 
@@ -60,6 +61,20 @@ registerRoute(
     ],
   })
 );
+
+//Cache all request to Flickr API
+const flickrApiOrigin = "https://api.flickr.com";
+registerRoute(
+  ({url}) => url.origin === flickrApiOrigin,
+  new NetworkFirst({
+    cacheName: 'flickr-cache',
+    plugins: [
+      new CacheableResponsePlugin({
+        statuses: [200]
+      })
+    ]
+  })
+)
 
 // This allows the web app to trigger skipWaiting via
 // registration.waiting.postMessage({type: 'SKIP_WAITING'})

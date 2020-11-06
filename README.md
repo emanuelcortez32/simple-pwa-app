@@ -91,3 +91,6 @@ Es recomendable esta estrategia cuando queremos mucha velocidad y estamos maneja
 NUNCA conviene escribir nuestro propio service worker especialmente con herramientas de bajo nivel.
 
 Para implementar nuestro propio service worker usaremos Workbox, una librería creada por Google para crear Service Workers.
+
+* [Guides](https://developers.google.com/web/tools/workbox/guides/get-started)
+* [Modules](https://developers.google.com/web/tools/workbox/modules)
