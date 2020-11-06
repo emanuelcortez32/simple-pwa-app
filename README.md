@@ -9,8 +9,23 @@ Podemos tener control absoluto a nivel red de nuestra aplicación gracias a los 
 * Proxy In-Browser
 * Push Notifications
 
-<div align="right">
-  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+## El ciclo de vida del service worker
+
+Un service worker tiene un ciclo de vida completamente separado de tu página web.
+
+Si quieres instalar un service worker para tu sitio, debes registrarlo. Esto se realiza en el lenguaje JavaScript de tu página. Cuando registres un service worker, el navegador iniciará la etapa de instalación del proceso en segundo plano.
+
+Por lo general, durante la etapa de instalación, te convendrá almacenar en caché algunos elementos estáticos. Si todos los archivos se almacenan correctamente en caché, se instalará el service worker. Si no se puede descargar o almacenar en caché alguno de los archivos, el paso de instalación fallará y el service worker no se activará (es decir, no se instalará). Si esto ocurre, no te preocupes; se realizará un nuevo intento la próxima vez. Sin embargo, si la instalación tiene éxito, podrás estar seguro de que dichos elementos estáticos estarán en la caché.
+
+Después de la instalación, comenzará el paso de activación. Es una excelente oportunidad para administrar las cachés anteriores.
+
+Después de la etapa de activación, el service worker controlará todas las páginas que estén a su alcance. Sin embargo, no se controlará la página que registró por primera vez el service worker hasta que se vuelva a cargar. Una vez que un service worker tiene el control, estará en uno de dos estados: el service worker se rescindirá para ahorrar memoria o controlará eventos de mensaje y extracción que ocurran cuando se emita un mensaje o solicitud de red desde tu página.
+
+A continuación, se muestra una versión muy simplificada del ciclo de vida del service worker cuando se instala por primera vez.
+
+<div align="center">
+  <img src="https://developers.google.com/web/fundamentals/primers/service-workers/images/sw-lifecycle.png?hl=es">
+  <small><p>Ciclo de vida de un Service Worker</p></small>
 </div>
 
 ## Estrategias de Carga
@@ -25,8 +40,17 @@ La primera y fundamental se llama Network Only. Esta se encarga checar si hay co
 Por defecto si no queremos cache o manejamos información en tiempo real.
 
 <div align="center">
-  <img src="img/network-only.jpg">
+  <img src="https://developers.google.com/web/tools/workbox/images/modules/workbox-strategies/network-only.png">
   <small><p>Network Only</p></small>
+</div>
+
+**Cache Only**
+
+Cache Only sirve el contenido solo si este se encuentra cacheado, lo que nos obligaría a establecer estrategias de precacheo.
+
+<div align="center">
+  <img src="https://developers.google.com/web/tools/workbox/images/modules/workbox-strategies/cache-only.png">
+  <small><p>Cache Only</p></small>
 </div>
 
 **Network First**
@@ -37,7 +61,7 @@ Network First es otra estrategia de carga, se encarga mandar la petición a inte
 Cuando queremos la última versión de un asset y tener soporte offline.
 
 <div align="center">
-  <img src="img/network-first.jpg">
+  <img src="https://developers.google.com/web/tools/workbox/images/modules/workbox-strategies/network-first.png">
   <small><p>Network First</p></small>
 </div>
 
@@ -48,7 +72,7 @@ Es una estrategia de carga que lo primero que hace es ir al cache y si encuentra
 Esta estrategia puede ser peligrosa y solo es recomendable cuando queremos máxima velocidad y estamos manejando un recurso que nunca cambia, como una imagen o alguna fuente.
 
 <div align="center">
-  <img src="img/cache-first.jpg">
+  <img src="https://developers.google.com/web/tools/workbox/images/modules/workbox-strategies/cache-first.png">
   <small><p>Cache First</p></small>
 </div>
 
@@ -59,12 +83,8 @@ Esta es una estrategia de carga muy particular y que mejor funciona a la hora de
 Es recomendable esta estrategia cuando queremos mucha velocidad y estamos manejando un recurso que puede estar levemente desactualizado.
 
 <div align="center">
-  <img src="img/stale-while-revalidate.jpg">
+  <img src="https://developers.google.com/web/tools/workbox/images/modules/workbox-strategies/stale-while-revalidate.png">
   <small><p>Stale While revalidate</p></small>
-</div>
-
-<div align="right">
-  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
 </div>
 
 ## Workbox
