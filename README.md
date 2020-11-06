@@ -34,7 +34,8 @@
 
 **Características de una PWA**
 
-* Responsive:
+* **Responsive**:
+
     En la actualidad, la mayoría de webs cuentan con diseño responsive que las permite
     adaptarse a diferentes dispositivos, algo imprescindible con el papel predominante de
     los smartphones. A pesar de que las PWA van más allá del simple diseño responsive,
@@ -43,24 +44,28 @@
     (con los consecuentes cambios de medidas y resolución), y más considerando la
     naturaleza mobile de las mismas.
 
-* Seguras:
+* **Seguras**:
+
     Se usa siempre el protocolo seguro HTTPS que, además, es necesario para la
     instalación del Service Worker. Esto posibilita asegurar que el acceso sea seguro y
     que el contenido servido no haya sido sujeto a manipulaciones. Se emplean
     tecnologías como TLS para el cifrado web.
 
-* Rápida:
+* **Rápida**:
+
     Por lo general, una PWA tiene la velocidad, tanto de carga como de navegación,
     optimizada. Esto permite que los contenidos se muestren al usuario prácticamente al
     instante, ya que se apoyan en el almacenamiento en la caché. Las interacciones, tales
     como clics o scroll, también deben ser inmediatas. El menor peso de la Progressive
     Web App en comparación a la App nativa es un factor decisivo para ello.
 
-* Offline:
+* **Offline**:
+
     Una PWA debe permitir el acceso, ya sea de manera parcial o incluso total, a pesar
     de que no haya conexión a Internet (o esta sea de baja calidad).
 
-* Multiplataforma:
+* **Multiplataforma**:
+
     En su desarrollo, la tecnología utilizada contempla su ejecución en diversos
     dispositivos, sistemas operativos y navegadores. Esto, además de ser clave a la hora
     de ofrecer una experiencia de usuario satisfactoria y alcanzar a más público
