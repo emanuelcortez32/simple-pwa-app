@@ -1,6 +1,6 @@
-## Web Manifest
+## Manifest
 
-El web manifest permite implementar la funcionalidad de Add to Homescreen.
+El manifest permite implementar la funcionalidad de Add to Homescreen.
 
 Create-react-app nos da un Web Manifest pre armado el cual debemos configurar. Todo lo que tiene que ver con nuestro Web Manifest está dentro de los archivos index.html y manifest.json de la carpeta public de nuestro proyecto.
 
