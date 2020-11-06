@@ -5,4 +5,4 @@
 * Native Sharing — We can invoke the native sharing mechanism of the device as part of the Web Share API.
 * Fingerprint Sensor — We can authenticate users via the fingerprint sensor using Web Authentication API. But is it still under development due to security reasons.
 
-* [Can I Use](https://caniuse.com/?search=Web%20Share)
+[Can I Use](https://caniuse.com/?search=Web%20Share)
